@@ -37,8 +37,8 @@ public class ManagerTest {
     Manager manager = new Manager(repository);
 
 
-    @Test
-    public void shouldFindticketsLedMow() {
+    @Test //тест проверки работы поиска, найдено 5 билетов, включена сортировка по возрастанию стоимости билета
+    public void shouldFindTicketsLedMow() {
         manager.add(mowAerNordWings);
         manager.add(mowAerS7);
         manager.add(mowAerPobeda);
@@ -63,16 +63,74 @@ public class ManagerTest {
         manager.add(aerMowS7);
 
 
-
         Ticket[] expected = manager.searchBy("LED", "MOW");
         Ticket[] actual = {ledMowPobeda, ledMowNordWings, ledMowUtair, ledMowUral, ledMowS7};
 //        Arrays.sort(expected);
         Assertions.assertArrayEquals(expected, actual);
     }
 
+        @Test //тест проверки поиска билетов, когда не найдено по нужному направлению
+    public void shouldFindTicketsMowBqs() {
+        manager.add(mowAerNordWings);
+        manager.add(mowAerS7);
+        manager.add(mowAerPobeda);
+        manager.add(mowLedPobeda);
+        manager.add(mowLedNordWings);
+        manager.add(mowLedS7);
+        manager.add(mowLedUral);
+        manager.add(mowLedUtair);
+        manager.add(ledAerNordWings);
+        manager.add(ledAerPobeda);
+        manager.add(ledAerUral);
+        manager.add(ledMowPobeda);
+        manager.add(ledMowNordWings);
+        manager.add(ledMowS7);
+        manager.add(ledMowUtair);
+        manager.add(ledMowUral);
+        manager.add(aerLedNordWings);
+        manager.add(aerLedPobeda);
+        manager.add(aerLedUral);
+        manager.add(aerMowNordWings);
+        manager.add(aerMowPobeda);
+        manager.add(aerMowS7);
 
-    @Test
-    public void shouldFindticketsLedMowMatchesMethod() {
+        Ticket[] expected = manager.searchBy("MOW", "BQS");
+        Ticket[] actual = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test // тест проверки поиска билетов, когда найден только один билет
+    public void shouldFindTicketsAerMow() {
+        manager.add(mowAerNordWings);
+        manager.add(mowAerS7);
+        manager.add(mowAerPobeda);
+        manager.add(mowLedPobeda);
+        manager.add(mowLedNordWings);
+        manager.add(mowLedS7);
+        manager.add(mowLedUral);
+        manager.add(mowLedUtair);
+        manager.add(ledAerNordWings);
+        manager.add(ledAerPobeda);
+        manager.add(ledAerUral);
+        manager.add(ledMowPobeda);
+        manager.add(ledMowNordWings);
+        manager.add(ledMowS7);
+        manager.add(ledMowUtair);
+        manager.add(ledMowUral);
+        manager.add(aerLedNordWings);
+        manager.add(aerLedPobeda);
+        manager.add(aerLedUral);
+        manager.add(aerMowS7);
+
+        Ticket[] expected = manager.searchBy("AER", "MOW");
+        Ticket[] actual = {aerMowS7};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test //тест проверки правильности поиска билета. запрос проходит
+    public void shouldFindTicketsLedMowMatchesMethod() {
         manager.add(mowAerNordWings);
         manager.add(mowAerS7);
         manager.add(mowAerPobeda);
@@ -102,8 +160,8 @@ public class ManagerTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void shouldFindticketsLedBqsMatchesMethod() {
+    @Test //тест проверки правильности поиска билета. запрос не проходит
+    public void shouldFindTicketsLedBqsMatchesMethod() {
         manager.add(mowAerNordWings);
         manager.add(mowAerS7);
         manager.add(mowAerPobeda);
@@ -132,4 +190,6 @@ public class ManagerTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+
 }
