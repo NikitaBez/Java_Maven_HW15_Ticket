@@ -69,7 +69,7 @@ public class ManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-        @Test //тест проверки поиска билетов, когда не найдено по нужному направлению
+    @Test //тест проверки поиска билетов, когда не найдено по нужному направлению
     public void shouldFindTicketsMowBqs() {
         manager.add(mowAerNordWings);
         manager.add(mowAerS7);
